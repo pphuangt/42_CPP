@@ -1,6 +1,6 @@
 #ifndef CONTACT_H
 #define CONTACT_H
-#include <string>
+# include <string>
 
 class Contact {
 private:
@@ -16,6 +16,11 @@ public:
     Contact& operator=(const Contact& other);
     ~Contact();
 
+    std::string getFirstName(void);
+    std::string getLastName(void);
+    std::string getNickname(void);
+    std::string getDarkestSecret(void);
+    std::string getPhoneNumber(void);
     void setFirstName(const std::string &firstName);
     void setLastName(const std::string &lastName);
     void setNickname(const std::string &nickname);

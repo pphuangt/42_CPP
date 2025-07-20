@@ -22,6 +22,31 @@ Contact& Contact::operator=(const Contact& other)
     return *this;
 }
 
+std::string Contact::getFirstName(void)
+{
+    return (this->_firstName);
+}
+
+std::string Contact::getLastName(void)
+{
+    return (this->_lastName);
+}
+
+std::string Contact::getNickname(void)
+{
+    return (this->_nickname);
+}
+
+std::string Contact::getDarkestSecret(void)
+{
+    return (this->_darkestSecret);
+}
+
+std::string Contact::getPhoneNumber(void)
+{
+    return (this->_phoneNumber);
+}
+
 void Contact::setFirstName(const std::string &firstName)
 {
     this->_firstName = firstName;
