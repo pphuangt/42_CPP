@@ -22,27 +22,27 @@ Contact& Contact::operator=(const Contact& other)
     return *this;
 }
 
-std::string Contact::getFirstName(void)
+std::string Contact::getFirstName()
 {
     return (this->_firstName);
 }
 
-std::string Contact::getLastName(void)
+std::string Contact::getLastName()
 {
     return (this->_lastName);
 }
 
-std::string Contact::getNickname(void)
+std::string Contact::getNickname()
 {
     return (this->_nickname);
 }
 
-std::string Contact::getDarkestSecret(void)
+std::string Contact::getDarkestSecret()
 {
     return (this->_darkestSecret);
 }
 
-std::string Contact::getPhoneNumber(void)
+std::string Contact::getPhoneNumber()
 {
     return (this->_phoneNumber);
 }

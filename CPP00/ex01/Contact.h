@@ -16,11 +16,11 @@ public:
     Contact& operator=(const Contact& other);
     ~Contact();
 
-    std::string getFirstName(void);
-    std::string getLastName(void);
-    std::string getNickname(void);
-    std::string getDarkestSecret(void);
-    std::string getPhoneNumber(void);
+    std::string getFirstName();
+    std::string getLastName();
+    std::string getNickname();
+    std::string getDarkestSecret();
+    std::string getPhoneNumber();
     void setFirstName(const std::string &firstName);
     void setLastName(const std::string &lastName);
     void setNickname(const std::string &nickname);
