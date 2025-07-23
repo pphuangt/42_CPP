@@ -12,8 +12,6 @@ private:
 
 public:
     Contact();
-    Contact(const Contact& other);
-    Contact& operator=(const Contact& other);
     ~Contact();
 
     std::string getFirstName();

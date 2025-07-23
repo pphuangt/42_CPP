@@ -1,24 +1,10 @@
 #include "PhoneBook.h"
 
-PhoneBook::PhoneBook(): index(0) {}
-
-PhoneBook::PhoneBook(const PhoneBook& other): index(other.index)
-{
-    for (int i = 0; i < 8; i++) { contacts[i] = other.contacts[i]; }
-}
-
-PhoneBook& PhoneBook::operator=(const PhoneBook& other)
-{
-    if (this != &other) {
-        index = other.index;
-        for (int i = 0; i < 8; i++) { contacts[i] = other.contacts[i]; }
-    }
-    return *this;
-}
+PhoneBook::PhoneBook(): _index(0) {}
 
 PhoneBook::~PhoneBook() {}
 
-void PhoneBook::add()
+bool PhoneBook::add()
 {
     std::string firstName;
     std::string lastName;
@@ -26,81 +12,94 @@ void PhoneBook::add()
     std::string darkestSecret;
     std::string phoneNumber;
 
-    if (!_getInput("Enter first name: ", firstName)) return;
-    if (!_getInput("Enter last name: ", lastName)) return;
-    if (!_getInput("Enter nickname: ", nickname)) return;
-    if (!_getInput("Enter darkest secret: ", darkestSecret)) return;
-    if (!_getInput("Enter phone number: ", phoneNumber)) return;
-
-    this->contacts[this->index].setFirstName(firstName);
-    this->contacts[this->index].setLastName(lastName);
-    this->contacts[this->index].setNickname(nickname);
-    this->contacts[this->index].setDarkestSecret(darkestSecret);
-    this->contacts[this->index].setPhoneNumber(phoneNumber);
-
-    this->index = (this->index + 1) % 8;
+    if (!_readInput("Enter first name: ", firstName)) return false;
+    if (!_readInput("Enter last name: ", lastName)) return false;
+    if (!_readInput("Enter nickname: ", nickname)) return false;
+    if (!_readInput("Enter darkest secret: ", darkestSecret)) return false;
+    if (!_readInput("Enter phone number: ", phoneNumber)) return false;
+    _contacts[_index].setFirstName(firstName);
+    _contacts[_index].setLastName(lastName);
+    _contacts[_index].setNickname(nickname);
+    _contacts[_index].setDarkestSecret(darkestSecret);
+    _contacts[_index].setPhoneNumber(phoneNumber);
+    _index = (_index + 1) % 8;
+    return true;
 }
 
-void PhoneBook::search()
+bool PhoneBook::search()
 {
-    int i = 0;
+    std::string s;
 
-    this->_display();
-    std::cout << "Enter index of the entry to display: ";
-    if (!(std::cin >> i)) {
-        if (!std::cin.eof()) std::cout << "Not an integer number" << std::endl;
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        return;
-    }
-
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-    if (i < 1 || i > 8 || this->contacts[i - 1].getFirstName().empty())
-        std::cout << "Out of range" << std::endl;
-    else {
-        Contact contact = this->contacts[i - 1];
-        std::cout << "first name: " << contact.getFirstName() << std::endl;
-        std::cout << "last name: " << contact.getLastName() << std::endl;
-        std::cout << "nickname: " << contact.getNickname() << std::endl;
-        std::cout << "darkest secret: " << contact.getDarkestSecret()
-                  << std::endl;
-        std::cout << "phone number: " << contact.getPhoneNumber() << std::endl;
-    }
+    _displayList();
+    if (!_readInput("Enter index: ", s)) return false;
+    if (s == "1")
+        _displayContact(0);
+    else if (s == "2")
+        _displayContact(1);
+    else if (s == "3")
+        _displayContact(2);
+    else if (s == "4")
+        _displayContact(3);
+    else if (s == "5")
+        _displayContact(4);
+    else if (s == "6")
+        _displayContact(5);
+    else if (s == "7")
+        _displayContact(6);
+    else if (s == "8")
+        _displayContact(7);
+    return true;
 }
 
-std::string PhoneBook::_truncateField(const std::string& str)
-{
-    if (str.length() > 10) return str.substr(0, 9) + ".";
-    return str;
-}
-
-bool PhoneBook::_getInput(const std::string& prompt, std::string& input)
+bool PhoneBook::_readInput(const std::string& prompt, std::string& s)
 {
     while (true) {
         std::cout << prompt;
-        std::getline(std::cin, input);
-        if (!std::cin.good()) {
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            return false;
-        }
-        if (!input.empty()) return true;
+        if (!std::getline(std::cin, s)) return false;
+        s = _trim(s);
+        if (!s.empty()) return true;
     }
 }
 
-void PhoneBook::_display() const
+void PhoneBook::_displayList()
 {
+    std::cout << std::setw(10) << std::right << "index" << "|"
+    << std::setw(10) << std::right << "first name" << "|"
+    << std::setw(10) << std::right << "last name" << "|"
+    << std::setw(10) << std::right << "nickname" << std::endl;
     for (int i = 0; i < 8; i++) {
-        Contact contact = this->contacts[i];
-
-        if (contact.getFirstName().empty()) break;
+        if (_contacts[i].getFirstName().empty()) break;
         std::cout << std::setw(10) << std::right << (i + 1) << "|"
                   << std::setw(10) << std::right
-                  << _truncateField(contact.getFirstName()) << "|"
+                  << _truncateField(_contacts[i].getFirstName()) << "|"
                   << std::setw(10) << std::right
-                  << _truncateField(contact.getLastName()) << "|"
+                  << _truncateField(_contacts[i].getLastName()) << "|"
                   << std::setw(10) << std::right
-                  << _truncateField(contact.getPhoneNumber()) << std::endl;
+                  << _truncateField(_contacts[i].getNickname()) << std::endl;
     }
+}
+
+void PhoneBook::_displayContact(int index)
+{
+    std::cout << "first name: " << _contacts[index].getFirstName() << std::endl;
+    std::cout << "last name: " << _contacts[index].getLastName() << std::endl;
+    std::cout << "nickname: " << _contacts[index].getNickname() << std::endl;
+    std::cout << "darkest secret: " << _contacts[index].getDarkestSecret() << std::endl;
+    std::cout << "phone number: " << _contacts[index].getPhoneNumber() << std::endl;
+}
+
+
+std::string PhoneBook::_trim(const std::string& s)
+{
+    size_t start = s.find_first_not_of(" \t\n\r\f\v");
+    size_t end = s.find_last_not_of(" \t\n\r\f\v");
+
+    if (start >= s.length()) return "";
+    return s.substr(start, end - start + 1);
+}
+
+std::string PhoneBook::_truncateField(const std::string& s)
+{
+    if (s.length() > 10) return s.substr(0, 9) + ".";
+    return s;
 }

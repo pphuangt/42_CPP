@@ -1,15 +1,12 @@
 #include <iostream>
 
-int main(const int ac, char **av)
+int main(const int ac, char** av)
 {
     if (ac > 1) {
         for (int i = 1; i < ac; i++) {
-            const char  *s = av[i];
-            for (int j = 0; s[j] != '\0'; j++) {
-                const char c = std::toupper(s[j]);
-                std::cout << c;
+            for (int j = 0; av[i][j] != '\0'; j++) {
+                std::cout << (char)std::toupper(av[i][j]);
             }
-            std::cout << " ";
         }
         std::cout << std::endl;
     }

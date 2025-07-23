@@ -1,24 +1,23 @@
 #include "PhoneBook.h"
 #include <iostream>
 
-int main(void)
+int main()
 {
     PhoneBook phonebook;
-    std::string input;
+    std::string s;
 
-    while (std::cin.good()) {
-        std::cout << "Enter command [ADD | SEARCH | EXIT]: ";
-        std::getline(std::cin, input);
-        if (std::cin.eof()) {
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            break;
+    while (true) {
+        std::cout << "Enter command [ADD, SEARCH, EXIT]: ";
+        if (!std::getline(std::cin, s)) break;
+        if (s == "ADD") {
+            if (!phonebook.add())
+                break;
         }
-        if (input == "ADD")
-            phonebook.add();
-        else if (input == "SEARCH")
-            phonebook.search();
-        else if (input == "EXIT")
+        else if (s == "SEARCH") {
+            if (!phonebook.search())
+                break;
+        }
+        else if (s == "EXIT")
             break;
     }
     return 0;

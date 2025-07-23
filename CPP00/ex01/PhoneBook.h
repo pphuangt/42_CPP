@@ -6,19 +6,19 @@
 
 class PhoneBook {
 private:
-    int index;
-    Contact contacts[8];
-    void _display() const;
-    static std::string _truncateField(const std::string& str);
-    static bool _getInput(const std::string& prompt, std::string& input);
+    int _index;
+    Contact _contacts[8];
+    bool _readInput(const std::string& prompt, std::string& s);
+    void _displayList();
+    void _displayContact(int index);
+    std::string _trim(const std::string& s);
+    std::string _truncateField(const std::string& s);
 
 public:
     PhoneBook();
-    PhoneBook(const PhoneBook& other);
-    PhoneBook& operator=(const PhoneBook& other);
     ~PhoneBook();
-    void add();
-    void search();
+    bool add();
+    bool search();
 };
 
 #endif
