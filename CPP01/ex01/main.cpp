@@ -2,7 +2,7 @@
 
 Zombie* zombieHorde(int N, std::string name);
 
-int main(void)
+int main()
 {
     int N = 8;
     Zombie* zombies = zombieHorde(N, "Zombies");
