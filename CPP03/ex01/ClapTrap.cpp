@@ -1,0 +1,87 @@
+#include "ClapTrap.h"
+#include <iostream>
+
+ClapTrap::ClapTrap(const std::string& name)
+    : _name(name), _health(_defaultHealth), _energy(_defaultEnergy),
+      _damage(_defaultDamage)
+{
+    std::cout << _name << " String constructor called" << std::endl;
+}
+
+ClapTrap::ClapTrap(ClapTrap const& other)
+    : _name(other._name), _health(other._health), _energy(other._energy),
+      _damage(other._damage)
+{
+    std::cout << _name << " Copy constructor called" << std::endl;
+}
+
+ClapTrap::~ClapTrap()
+{
+    std::cout << _name << " Destructor called" << std::endl;
+}
+
+ClapTrap& ClapTrap::operator=(ClapTrap const& other)
+{
+    std::cout << _name << " Assignation operator called" << std::endl;
+    if (this != &other) {
+        _name = other._name;
+        _health = other._health;
+        _energy = other._energy;
+        _damage = other._damage;
+    }
+    return *this;
+}
+
+void ClapTrap::attack(const std::string& target)
+{
+    std::cout << _name;
+    if (_health == 0) {
+        std::cout << " cannot attack because it's already dead." << '\n';
+    }
+    else if (_energy == 0) {
+        std::cout << " cannot attack because it has no energy points left."
+                  << '\n';
+    }
+    else {
+        _energy--;
+        std::cout << " attacks " << target << ", causing " << _damage
+                  << " points of damage!" << '\n';
+    }
+}
+
+void ClapTrap::takeDamage(unsigned int amount)
+{
+    std::cout << _name;
+    if (_health == 0) {
+        std::cout << " cannot take more damage because it's already dead."
+                  << '\n';
+    }
+    else if (_health <= amount) {
+        _health = 0;
+        std::cout << " takes " << amount << " points of damage and dies!"
+                  << '\n';
+    }
+    else {
+        _health -= amount;
+        std::cout << " takes " << amount << " points of damage!" << '\n';
+    }
+}
+
+void ClapTrap::beRepaired(unsigned int amount)
+{
+    std::cout << _name;
+    if (_health == 0) {
+        std::cout << " cannot repair itself because it's already dead." << '\n';
+    }
+    else if (_energy == 0) {
+        std::cout
+                << " cannot repair itself because it has no energy points left."
+                << '\n';
+    }
+    else {
+        _energy--;
+        _health += amount;
+        std::cout << " repairs itself for " << amount << " points of damage!"
+                  << '\n';
+    }
+}
