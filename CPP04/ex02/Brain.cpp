@@ -13,7 +13,7 @@ Brain::Brain(const Brain& other): _index(0)
 
 Brain::~Brain()
 {
-    std::cout << "Brain destructor called" << '\n';
+    std::cout << "Brain destructor called" << std::endl;
 }
 
 Brain& Brain::operator=(const Brain& other)
@@ -35,18 +35,4 @@ std::string Brain::get_idea(int index) const
 {
     if (index >= brain_size || index < 0) { return ""; }
     return ideas[index];
-}
-
-std::ostream& operator<<(std::ostream& os, const Brain& brain)
-{
-    std::string idea;
-
-    for (int i = 0; i < Brain::brain_size; ++i) {
-        idea = brain.get_idea(i);
-        if (idea.empty()) { os << "No idea here..." << '\n'; }
-        else {
-            os << idea << '\n';
-        }
-    }
-    return os;
 }

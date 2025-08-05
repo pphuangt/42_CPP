@@ -17,7 +17,7 @@ public:
     virtual ~Animal();
 
     virtual void makeSound() const = 0;
-    virtual Brain* brain();
+    virtual Brain* brain() = 0;
     const std::string& getType() const;
 };
 

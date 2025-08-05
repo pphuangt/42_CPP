@@ -5,7 +5,8 @@
 
 class Brain {
 private:
-    std::string ideas[100];
+    static const int brain_size = 100;
+    std::string ideas[brain_size];
     int _index;
 
 public:
@@ -17,10 +18,6 @@ public:
 
     void add_idea(const std::string& idea);
     std::string get_idea(int index) const;
-
-    static const int brain_size = 100;
 };
-
-std::ostream& operator<<(std::ostream& os, const Brain& brain);
 
 #endif
