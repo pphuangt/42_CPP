@@ -13,7 +13,7 @@ Brain::Brain(const Brain& other): _index(0)
 
 Brain::~Brain()
 {
-    std::cout << "Brain destructor called" << '\n';
+    std::cout << "Brain destructor called" << std::endl;
 }
 
 Brain& Brain::operator=(const Brain& other)
