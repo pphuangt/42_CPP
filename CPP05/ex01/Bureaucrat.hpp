@@ -4,6 +4,8 @@
 # include <string>
 # include <exception>
 
+class Form;
+
 class Bureaucrat {
 public:
 	class GradeTooHighException: public std::exception {
@@ -28,6 +30,7 @@ public:
 
 	void promote();
 	void demote();
+	void signForm(Form& form) const;
 
 private:
 	const std::string name_;
