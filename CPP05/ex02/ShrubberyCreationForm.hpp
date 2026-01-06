@@ -1,9 +1,9 @@
 #ifndef SHRUBBERYCREATIONFORM_HPP
 # define SHRUBBERYCREATIONFORM_HPP
 # include <string>
-
-class AForm;
-class Bureaucrat;
+# include <fstream>
+# include <stdexcept>
+# include "AForm.hpp"
 
 class ShrubberyCreationForm: public AForm {
 public:

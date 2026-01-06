@@ -1,9 +1,7 @@
 #ifndef ROBOTOMYREQUESTFORM_HPP
 # define ROBOTOMYREQUESTFORM_HPP
 # include <string>
-
-class AForm;
-class Bureaucrat;
+# include "AForm.hpp"
 
 class RobotomyRequestForm {
 public:

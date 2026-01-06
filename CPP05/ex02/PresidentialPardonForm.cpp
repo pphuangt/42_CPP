@@ -1,6 +1,4 @@
 #include "PresidentialPardonForm.hpp"
-#include "AForm.hpp"
-#include "Bureaucrat.hpp"
 
 PresidentialPardonForm::PresidentialPardonForm(const std::string& target)
 	: AForm("PresidentialPardonForm", gradeToSign_, gradeToExecute_, target)
@@ -19,7 +17,7 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPard
 
 PresidentialPardonForm::~PresidentialPardonForm() {}
 
-void PresidentialPardonForm::execute(const Bureaucrat& executor)
+void PresidentialPardonForm::execute(const Bureaucrat& executor) const
 {
 	AForm::execute(executor);
 	// main execute

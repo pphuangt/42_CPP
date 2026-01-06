@@ -34,6 +34,7 @@ public:
 	void promote();
 	void demote();
 	void signForm(AForm& form) const;
+	void executeForm(const AForm& form) const;
 
 private:
 	const std::string name_;

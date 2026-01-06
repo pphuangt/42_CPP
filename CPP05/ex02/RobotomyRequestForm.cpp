@@ -1,6 +1,4 @@
 #include "RobotomyRequestForm.hpp"
-#include "AForm.hpp"
-#include "Bureaucrat.hpp"
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string& target)
 	: AForm("RobotomyRequestForm", gradeToSign_, gradeToExecute_, target)
@@ -19,7 +17,7 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& o
 
 RobotomyRequestForm::~RobotomyRequestForm() {}
 
-void RobotomyRequestForm::execute(const Bureaucrat& executor)
+void RobotomyRequestForm::execute(const Bureaucrat& executor) const
 {
 	AForm::executor(executor);
 }

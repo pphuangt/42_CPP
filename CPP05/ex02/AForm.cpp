@@ -43,6 +43,11 @@ bool AForm::getIsSigned() const
 	return isSigned_;
 }
 
+const std::string& AForm::getTarget() const
+{
+	return target_;
+}
+
 void AForm::beSigned(const Bureaucrat& bureaucrat)
 {
 	if (bureaucrat.getGrade() > gradeToSign_)
@@ -50,7 +55,7 @@ void AForm::beSigned(const Bureaucrat& bureaucrat)
 	isSigned_ = true;
 }
 
-void AForm::execute(const Bureaucrat& bureaucrat)
+void AForm::execute(const Bureaucrat& bureaucrat) const
 {
 	if (!isSigned_)
 		throw FormNotSignedException();

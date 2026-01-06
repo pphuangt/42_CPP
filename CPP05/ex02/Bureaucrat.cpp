@@ -42,7 +42,7 @@ void Bureaucrat::promote()
 
 void Bureaucrat::demote()
 {
-	if (grade_ >= lowGrade_)
+	if (grade_ >= lowestGrade_)
 		throw Bureaucrat::GradeTooLowException();
 	grade_++;
 }
@@ -54,7 +54,18 @@ void Bureaucrat::signForm(AForm& form) const
 		std::cout << name_ << " signed " << form.getName() << std::endl;
 	}
 	catch (const std::exception& e) {
-		std::cout << name_ << " coundn't signed " << form.getName() << " because " << e.what() << "." << std::endl;
+		std::cerr << name_ << " coundn't signed " << form.getName() << " because " << e.what() << "." << std::endl;
+	}
+}
+
+void Bureaucrat::executeForm(const AForm& form) const
+{
+	try {
+		form.execute(*this);
+		std::cout << name_ << " executed " << form.getName() << std::endl;
+	}
+	catch (const std::exception &e) {
+		std::cerr << name_ << " coundn't executed " << form.getName() << " because " << e.what() << "." << std::endl;
 	}
 }
 

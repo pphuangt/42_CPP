@@ -1,6 +1,4 @@
 #include "ShrubberyCreationForm.hpp"
-#include "AForm.hpp"
-#include "Bureaucrat.hpp"
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target)
 	: AForm("ShrubberyCreationForm", gradeToSign_, gradeToExecute_, target)
@@ -19,8 +17,24 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 
 ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
-void ShrubberyCreationForm::execute(const Bureaucrat& executor)
+void ShrubberyCreationForm::execute(const Bureaucrat& executor) const
 {
 	AForm::execute(executor);
-	// core execute logic
+
+	const std::string filename = getTarget() + "_shrubbery";
+	std::ofstream ofs(filename.c_str());
+	if (!ofs.is_open())
+		throw std::runtime_error("Failed to create file: " + filename);
+
+	ofs << "       _-_\n";
+    ofs << "    /~~   ~~\\\n";
+    ofs << " /~~         ~~\\\n";
+    ofs << "{               }\n";
+    ofs << " \\  _-     -_  /\n";
+    ofs << "   ~  \\\\ //  ~\n";
+    ofs << "_- -   | | _- _\n";
+    ofs << "  _ -  | |   -_\n";
+    ofs << "      // \\\\\n";
+    
+    ofs.close();
 }

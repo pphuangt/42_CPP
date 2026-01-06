@@ -37,8 +37,8 @@ public:
 	int getGradeToSign() const;
 	int getGradeToExecute() const;
 	bool getIsSigned() const;
+	const std::string& getTarget() const;
 	void beSigned(const Bureaucrat& bureaucrat);
-
 	virtual void execute(const Bureaucrat& executor) const = 0;
 
 private:
