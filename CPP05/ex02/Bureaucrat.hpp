@@ -9,14 +9,17 @@ class AForm;
 class Bureaucrat {
 public:
 	class GradeTooHighException: public std::exception {
-		public:
-			virtual const char* what() const throw();
+	public:
+		virtual const char* what() const throw();
 	};
 
 	class GradeTooLowException: public std::exception {
-		public:
-			virtual const char* what() const throw();
+	public:
+		virtual const char* what() const throw();
 	};
+
+	static const int highestGrade_ = 1;
+	static const int lowestGrade_ = 150;
 
 	Bureaucrat(const std::string& name, int grade);
 	Bureaucrat(const Bureaucrat& other);

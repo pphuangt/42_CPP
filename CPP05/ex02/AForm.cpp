@@ -1,12 +1,12 @@
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
 
-AForm::AForm(const std::string& name, int gradeToSign, int GradeToExecute)
-	: name_(name), gradeToSign_(gradeToSign), gradeToExecute_(GradeToExecute), isSigned_(false)
+AForm::AForm(const std::string& name, int gradeToSign, int GradeToExecute, const std::string& target)
+	: name_(name), gradeToSign_(gradeToSign), gradeToExecute_(GradeToExecute), isSigned_(false), target_(target)
 {
-	if (gradeToSign < 1 || GradeToExecute < 1)
+	if (gradeToSign < highestGrade_ || GradeToExecute < highestGrade_)
 		throw AForm::GradeTooHighException();
-	if (gradeToSign > 150 || GradeToExecute > 150)
+	if (gradeToSign > lowestGrade_ || GradeToExecute > lowestGrade_)
 		throw AForm::GradeTooLowException();
 }
 
@@ -50,6 +50,14 @@ void AForm::beSigned(const Bureaucrat& bureaucrat)
 	isSigned_ = true;
 }
 
+void AForm::execute(const Bureaucrat& bureaucrat)
+{
+	if (!isSigned_)
+		throw FormNotSignedException();
+	if (bureaucrat.getGrade() > gradeToExecute_)
+		throw GradeTooLowException();
+}
+
 const char* AForm::GradeTooHighException::what() const throw()
 {
 	return "Grade is too high";
@@ -58,6 +66,11 @@ const char* AForm::GradeTooHighException::what() const throw()
 const char* AForm::GradeTooLowException::what() const throw()
 {
 	return "Grade is too low";
+}
+
+const char* AForm::FormNotSignedException::what() const throw()
+{
+	return "Form not signed";
 }
 
 std::ostream& operator<<(std::ostream& os, const AForm& form)
