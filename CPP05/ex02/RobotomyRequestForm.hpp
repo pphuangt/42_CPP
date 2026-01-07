@@ -3,7 +3,7 @@
 # include <string>
 # include "AForm.hpp"
 
-class RobotomyRequestForm {
+class RobotomyRequestForm : public AForm {
 public:
 	static const int gradeToSign_ = 72;
 	static const int gradeToExecute_ = 45;

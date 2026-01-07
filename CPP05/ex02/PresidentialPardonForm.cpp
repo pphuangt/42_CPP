@@ -5,7 +5,7 @@ PresidentialPardonForm::PresidentialPardonForm(const std::string& target)
 {}
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& other)
-	: AForm(orther)
+	: AForm(other)
 {}
 
 PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm& other)
@@ -20,6 +20,6 @@ PresidentialPardonForm::~PresidentialPardonForm() {}
 void PresidentialPardonForm::execute(const Bureaucrat& executor) const
 {
 	AForm::execute(executor);
-	// main execute
+	std::cout << getTarget() << " has been pardoned by Zaphod Beeblebrox" << std::endl;
 }
 

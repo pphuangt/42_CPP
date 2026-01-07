@@ -3,7 +3,7 @@
 # include <string>
 # include "AForm.hpp"
 
-class PresidentialPardonForm {
+class PresidentialPardonForm : public AForm {
 public:
 	static const int gradeToSign_ = 25;
 	static const int gradeToExecute_ = 5;
